@@ -1,2 +1,4 @@
 //퀴즈 로직 처리
-import React from 'react'
+export const shuffleArray = (array: any[]) => {
+  return [...array].sort(() => Math.random() - 0.5)
+}
