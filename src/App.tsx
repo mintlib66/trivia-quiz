@@ -4,7 +4,7 @@ import { fetchQuizQuestions } from './API'
 import QuestionCard from './components/QuestionCard'
 //types
 import { QuestionState, Difficulty } from './API'
-type AnswerObject = {
+export type AnswerObject = {
   question: string
   answer: string
   correct: boolean
@@ -55,7 +55,15 @@ function App() {
       setUserAnswers(prev => [...prev, answerObject])
     }
   }
-  const nextQuestion = () => {}
+
+  const nextQuestion = () => {
+    const nextQuestionNum = number + 1
+    if (nextQuestionNum === TOTAL_QUESTIONS) {
+      setGameOver(true)
+    } else {
+      setNumber(nextQuestionNum)
+    }
+  }
 
   return (
     <div className="App">
@@ -65,7 +73,7 @@ function App() {
           퀴즈 시작
         </button>
       ) : null}
-      {!gameOver ? <p className="score">점수:</p> : null}
+      {!gameOver ? <p className="score">점수: {score}</p> : null}
       {loading && <p>퀴즈 로딩중...</p>}
       {!loading && !gameOver && (
         <QuestionCard
